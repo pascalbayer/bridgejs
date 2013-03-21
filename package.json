@@ -1,0 +1,29 @@
+{
+    "name": "bridgejs",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "author": "Pascal Bayer <pascal.bayer@cubesoft.org>",
+    "description": "A realtime data synchronization framework for nodejs and clients",
+    "bin": {
+        "bridgejs": "./bin/bridgejs"
+    },
+    "main": "./index.js",
+    "keywords": [
+        "realtime",
+        "sockets",
+        "collection",
+        "communication"
+    ],
+    "dependencies" : {
+        "underscore":  ">=1.4.4",
+        "mongojs":  ">=0.4.6",
+        "socket.io":  ">=0.9.13",
+        "commander": ">=1.1.1",
+        "mkdirp": ">=0.3.5"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.9"
+    },
+    "preferGlobal": true
+}

@@ -1,1 +1,1 @@
-module.exports = require('./../libs/lib.bridge.js');
+module.exports = require('./lib/');
