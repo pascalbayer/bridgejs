@@ -8,13 +8,16 @@ var version = pkg.version;
 
 program
     .version(version)
+    .option('-A, --angular', 'Use AngularJS as MV* Framework for your new app')
     .parse(process.argv);
 
 var path = program.args.shift() || '.'
 
-mkdir(path, function(){
-    mkdir(path + '/public');
-});
+(function () {
+    mkdir(path, function(){
+        mkdir(path + '/public');
+    });
+} ());
 
 function mkdir(path, fn) {
     mkdirp (path, 0755, function(err) {

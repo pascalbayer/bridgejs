@@ -31,6 +31,50 @@ $ node app
 ```
 
 
+Options
+-------
+
+bridgejs has a few different switches which change behavior.
+
+- `-h`, `--help` Output usage information
+- `-V`, `--version` Output the version number
+- `-A`, `--angular` Use AngularJS as MV* Framework for your new app
+
+
+Usage
+-----
+
+### Default template
+
+
+
+### Template with AngularJS
+
+
+
+### Template with Backbone.js
+
+- Not available in current version
+
+
+Features
+--------
+
+- [x] Client/Server Collections
+- [x] Collection insert
+- [x] Collection publishing/subscription
+- [x] Integration with AngularJS
+- [x] Client side MongoDB API (cursor, find, sort, limit)
+- [x] CLI
+- [x] MongoDB as database on the server
+- [ ] Collection allow/deny
+- [ ] Collection update/delete methods
+- [ ] Collection
+- [ ] Login services
+- [ ] Client MongoDB API (operators $gt, $inc, $lt, ...)
+- [ ] AngularJS service for automatic scope refresh
+
+
 License
 -------
 
