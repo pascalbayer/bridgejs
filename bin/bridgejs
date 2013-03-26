@@ -1,30 +1,129 @@
 #!/usr/bin/env node
 var sys = require('sys');
-
+var http = require('http');
+var os = require('os');
 var program = require('commander');
+var fs = require('fs');
 var mkdirp = require('mkdirp');
 var pkg = require('../package.json');
 var version = pkg.version;
 
 program
     .version(version)
-    .option('-A, --angular', 'Use AngularJS as MV* Framework for your new app')
+    .option('-a, --angular', 'Use AngularJS as MV* framework for your new app')
+    .option('-j, --jquery', 'Use jQuery as DOM manipulation framework for your new app')
     .parse(process.argv);
 
-var path = program.args.shift() || '.'
+var path = program.args.shift() || '.';
+var eol = os.EOL;
 
-(function () {
-    mkdir(path, function(){
-        mkdir(path + '/public');
+var htmlTemplate = [
+    '<!DOCTYPE html>',
+    '    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->',
+    '    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->',
+    '    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->',
+    '    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->',
+    '    <head>',
+    '        <meta charset="utf-8">',
+    '        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">',
+    '        <title></title>',
+    '        <meta name="description" content="">',
+    '        <meta name="viewport" content="width=device-width">',
+    '        <link rel="stylesheet" href="client/css/normalize.css">',
+    '        <link rel="stylesheet" href="client/css/app.css">',
+    '        <script src="client/lib/modernizr.js"></script>',
+    '        <script src="client/lib/underscore.min.js"></script>',
+    '        <script src="client/lib/jquery.min.js"></script>',
+    '        <script src="client/lib/angular.min.js"></script>',
+    '        <script src="socket.io/socket.io.js"></script>',
+    '        <script src="bridgejs/bridgejs.js"></script>',
+    '        <script src="client/js/app.js"></script>',
+    '    </head>',
+    '    <body>',
+    '    </body>',
+    '</html>'
+].join(eol);
+
+var styleTemplate = [
+    '/* style.css created by bridgejs */',
+    '',
+    ''
+].join(eol);
+
+var scriptTemplate = [
+    '// script.js created by bridgejs',
+    '',
+    ''
+].join(eol);
+
+var appTemplate = [
+    '// Main application app.js created by bridgejs',
+    '',
+    'global.Bridge = require(\'bridgejs\');',
+    '',
+    ''
+].join(eol);
+
+// package.json
+var pkgTemplate = {
+    name: 'bridgejs',
+    version: version,
+    private: true,
+    scripts: {
+        start: 'node app.js'
+    },
+    dependencies: {
+        bridgejs: version
+    }
+}
+
+// Main
+mkdir(path, function () {
+    mkdir(path + '/client', function () {
+            mkdir(path + '/client/css', function () {
+                download('http://necolas.github.com/normalize.css/2.1.0/normalize.css', path + '/client/css/normalize.css');
+                write(path + '/client/css/app.css', styleTemplate);
+            });
+            mkdir(path + '/client/js', function () {
+                write(path + '/client/js/app.js', scriptTemplate);
+            });
+            mkdir(path + '/client/lib', function () {
+                download('http://modernizr.com/downloads/modernizr-latest.js', path + '/client/lib/modernizr.js');
+                download('http://underscorejs.org/underscore-min.js', path + '/client/lib/underscore.min.js');
+                download('http://code.jquery.com/jquery-latest.min.js', path + '/client/lib/jquery.min.js');
+                download('http://code.angularjs.org/1.0.5/angular.min.js', path + '/client/lib/angular.min.js');
+            });
+        });
+    mkdir(path + '/public', function () {
+        mkdir(path + '/public/downloads');
+        mkdir(path + '/public/img');
     });
-} ());
+    mkdir(path + '/server');
+    mkdir(path + '/tests');
+    write(path + '/index.html', htmlTemplate);
+    write(path + '/package.json', JSON.stringify(pkgTemplate, null, 4));
+    write(path + '/app.js', appTemplate);
+});
 
-function mkdir(path, fn) {
+
+function mkdir (path, fn) {
     mkdirp (path, 0755, function(err) {
         if (err) {
             throw err;
         }
-        console.log('   \x1b[36mcreate\x1b[0m : ' + path)
+        console.log('   \x1b[36mcreate\x1b[0m : ' + path);
         fn && fn();
     });
+}
+
+function download (url, file) {
+    http.get(url, function(response) {
+        response.pipe(fs.createWriteStream(file));
+        console.log('   \x1b[36mcreate\x1b[0m : ' + file);
+    });
+}
+
+function write(file, str) {
+    fs.writeFile(file, str);
+    console.log('   \x1b[36mcreate\x1b[0m : ' + file);
 }

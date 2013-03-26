@@ -60,19 +60,24 @@ Usage
 Features
 --------
 
-- [x] Client/Server Collections
-- [x] Collection insert
-- [x] Collection publishing/subscription
-- [x] Integration with AngularJS
-- [x] Client side MongoDB API (cursor, find, sort, limit)
-- [x] CLI
-- [x] MongoDB as database on the server
-- [ ] Collection allow/deny
-- [ ] Collection update/delete methods
-- [ ] Collection
-- [ ] Login services
-- [ ] Client MongoDB API (operators $gt, $inc, $lt, ...)
-- [ ] AngularJS service for automatic scope refresh
+### Implemented features
+
+- Client/Server Collections
+- Collection insert
+- Collection publishing/subscription
+- Integration with AngularJS
+- Client side MongoDB API (cursor, find, sort, limit)
+- CLI
+- MongoDB as database on the server
+
+### Missing features
+
+- Collection allow/deny
+- Collection update/delete methods
+- Collection
+- Login services
+- Client MongoDB API (operators $gt, $inc, $lt, ...)
+- AngularJS service for automatic scope refresh
 
 
 License
