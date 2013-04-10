@@ -1,7 +1,7 @@
 {
     "name": "bridgejs",
     "preferGlobal": true,
-    "version": "0.0.1",
+    "version": "0.0.3",
     "author": "Pascal Bayer <pascal.bayer@cubesoft.org>",
     "description": "A realtime data synchronization framework for nodejs and clients",
     "bin": {
