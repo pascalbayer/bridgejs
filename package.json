@@ -8,6 +8,10 @@
         "bridgejs": "./bin/bridgejs"
     },
     "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pascalbayer/bridgejs"
+    },
     "keywords": [
         "realtime",
         "sockets",

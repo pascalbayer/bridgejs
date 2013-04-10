@@ -63,7 +63,7 @@ Features
 ### Implemented features
 
 - Client/Server Collections
-- Collection insert
+- Collection insert, delete
 - Collection publishing/subscription
 - Integration with AngularJS
 - Client side MongoDB API (cursor, find, sort, limit)
@@ -73,11 +73,10 @@ Features
 ### Missing features
 
 - Collection allow/deny
-- Collection update/delete methods
-- Collection
+- Collection update method
 - Login services
 - Client MongoDB API (operators $gt, $inc, $lt, ...)
-- AngularJS service for automatic scope refresh
+- AngularJS service for automatic scope refresh (workaround with collection bindings is working fine)
 
 
 License
