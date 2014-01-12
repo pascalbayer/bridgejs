@@ -121,7 +121,7 @@ var fs = typeof global != 'undefined' ? require('fs') : {};
             Bridge.Settings.server.on('request', function (request, response) {
                 if (path == request.url.substr(0, path.length)) {
                     if (request.url == '/bridgejs/bridge.js') {
-                        fs.readFile(__dirname + '/lib.bridge.js', function (error, content) {
+                        fs.readFile(__dirname + '/server/lib.bridge.js', function (error, content) {
                             if (!error) {
                                 response.writeHead(200, {
                                     'Content-Type': 'text/javascript'
