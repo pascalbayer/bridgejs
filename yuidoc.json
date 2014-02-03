@@ -1,0 +1,14 @@
+{
+    "name": "bridgejs",
+    "description": "A Web Application Framework for NodeJS and Clients",
+    "version": "0.0.5",
+    "url": "http://bridgejs.com/",
+    "options": {
+        "paths": [
+            "./client",
+            "./server"
+        ],
+        "outdir": "./docs"
+    },
+    "themedir": "./yuidoc-bridgejs-theme"
+}

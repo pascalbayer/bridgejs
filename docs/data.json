@@ -1,0 +1,703 @@
+{
+    "project": {
+        "name": "bridgejs",
+        "description": "A Web Application Framework for NodeJS and Clients",
+        "version": "0.0.5",
+        "url": "http://bridgejs.com/",
+        "themedir": "./yuidoc-bridgejs-theme"
+    },
+    "files": {
+        "server/lib/lib.bridge.js": {
+            "name": "server/lib/lib.bridge.js",
+            "modules": {},
+            "classes": {
+                "Cursor": 1,
+                "Bridge.Collection": 1,
+                "Bridge.Socket": 1,
+                "Bridge.Accounts": 1,
+                "Bridge.Error": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "server/lib/server.bridge.core.js": {
+            "name": "server/lib/server.bridge.core.js",
+            "modules": {},
+            "classes": {
+                "Bridge": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Bridge": {
+            "name": "Bridge",
+            "shortname": "Bridge",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/server.bridge.core.js",
+            "line": 10,
+            "description": "Bridge provides all framework components on a client as well as a server",
+            "type": "{Bridge}"
+        },
+        "Cursor": {
+            "name": "Cursor",
+            "shortname": "Cursor",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/lib.bridge.js",
+            "line": 299,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nThe Cursor class is not directly accessible but it is returned whenever you call the `.find()` method of a\ncollection. A Cursor object provides standard methods to filter your result set.",
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "selector",
+                    "description": ""
+                },
+                {
+                    "name": "fields",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Cursor"
+            },
+            "is_constructor": 1
+        },
+        "Bridge.Collection": {
+            "name": "Bridge.Collection",
+            "shortname": "Bridge.Collection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/lib.bridge.js",
+            "line": 443,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Provide a name for the collection to create a consistent collection that is synchronized with the\nserver. Otherwise the collection is only created for the current client session.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Collection"
+            },
+            "is_constructor": 1
+        },
+        "Bridge.Socket": {
+            "name": "Bridge.Socket",
+            "shortname": "Bridge.Socket",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/lib.bridge.js",
+            "line": 663,
+            "description": "Socket provides functions for creating new web sockets clients/servers by providing functions for Socket.listen,\nSocket.emit and Socket.on for a socket"
+        },
+        "Bridge.Accounts": {
+            "name": "Bridge.Accounts",
+            "shortname": "Bridge.Accounts",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/lib.bridge.js",
+            "line": 791,
+            "description": "Accounts provide the build in account system to easily create new users, managing users and complete common\nrequired actions on user profiles"
+        },
+        "Bridge.Error": {
+            "name": "Bridge.Error",
+            "shortname": "Bridge.Error",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "server/lib/lib.bridge.js",
+            "line": 914,
+            "description": "Create an Error object by providing the error details as parameter",
+            "params": [
+                {
+                    "name": "message",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Error"
+            },
+            "is_constructor": 1,
+            "example": [
+                "\nThrow an exception with a localized error message and fallback if the localization package is not included\n\n     Bridge.Error(Localization.get('Error.notPrivileged') || 'You do not have the required permissions to\n     complete this action');"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 34,
+            "description": "Stores the global configuration settings",
+            "itemtype": "property",
+            "name": "Settings",
+            "type": "{Object}",
+            "example": [
+                "\nAvailable setting:\n\n     Bridge.Settings = {\n         server: '127.0.0.1:80',     // server to connect to\n         database: 'test',           // database to connect to\n         language: 'de-de'           // set a language for localized messages\n     }"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 53,
+            "description": "Indicates whether the script is running on a server (`true`) or a client (`false`)",
+            "itemtype": "property",
+            "name": "isServer",
+            "type": "Boolean",
+            "example": [
+                "\nFor running code only on server:\n\n     if (Bridge.isServer) {\n         // code is only executed on the server\n     }"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 68,
+            "description": "Indicates whether the script is running on a client (`true`) or a server (`false`)",
+            "itemtype": "property",
+            "name": "isClient",
+            "type": "Boolean",
+            "example": [
+                "\nFor running code only on client:\n\n     if (Bridge.isClient) {\n         // code is only executed on the client\n     }"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 81,
+            "description": "<b>USAGE: Anywhere</b>",
+            "itemtype": "method",
+            "name": "ready",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nRegister a ready callback\n\n     Bridge.ready(function () {\n         // Code to execute when client/server is ready\n     });"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 103,
+            "description": "Connect to a bridge instance",
+            "itemtype": "method",
+            "name": "connect",
+            "example": [
+                "\nConnect to an instance\n\n     Bridge.connect();"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 156,
+            "description": "Sort an array",
+            "itemtype": "method",
+            "name": "sort",
+            "params": [
+                {
+                    "name": "array",
+                    "description": ""
+                },
+                {
+                    "name": "descending",
+                    "description": "",
+                    "optional": true
+                },
+                {
+                    "name": "property",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\nSort the array passed as parameter, optionally pass in the sort order asc/desc and/or a field to sort by if the\narray contains objects with subfields/subproperties\n\n     // sort array descending\n     var array = Bridge.sort([1, 2, 5, 3, 9, 6, 4], true);\n\n     // sort array by property\n     var array = Bridge.sort([{name: 'Fabienne'}, {name: 'Svenja'}, {name: 'Isabel'}], 'name');\n\n     // sort array by subproperty using the `.subfield` convention, subfield must exist otherwise the function\n     // will throw an error\n     var array = Bridge.sort([\n         {name: {prename: 'Fabienne'}},\n         {name: {prename: 'Svenja'}},\n         {name: {prename: 'Isabel'}}], 'name.prename');\n\n     // sort array by field and descending\n     var array = Bridge.sort([{name: 'Fabienne'}, {name: 'Svenja'}, {name: 'Isabel'}], true, 'name');"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 208,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nGenerates a unique id in RFC 4122 v4 format",
+            "itemtype": "method",
+            "name": "uuid",
+            "return": {
+                "description": "uuid",
+                "type": "String"
+            },
+            "example": [
+                "\nGenerate a new uuid\n\n     Bridge.uuid(); // Returns a string like 'c3d4ef3c-54ea-47fc-c874-66952365d789'"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 230,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Server</div>\nPublish a collection or parts of on the server side",
+            "itemtype": "method",
+            "name": "publish",
+            "params": [
+                {
+                    "name": "name",
+                    "description": ""
+                },
+                {
+                    "name": "callback",
+                    "description": ""
+                }
+            ],
+            "example": [
+                "\nPublish a collection on the server. The callback function should always return a Cursor to the collection\nitems you want to publish.\n\n     Bridge.publish('allposts', function([optionalArgumentsArray]) {\n         var Posts = Bridge.Collection('Posts');\n         return Posts.find({username: 'My name'}).sort({date: 1}).limit(30);\n     });"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 265,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Client</div>\nSubscribe a collection on the client",
+            "itemtype": "method",
+            "name": "subscribe",
+            "params": [
+                {
+                    "name": "name",
+                    "description": ""
+                },
+                {
+                    "name": "args",
+                    "description": "Provide an array of optional arguments that are passed to the server's publish function",
+                    "type": "Array",
+                    "optional": true
+                },
+                {
+                    "name": "callback",
+                    "description": "Provide an optional callback that is called when all data is received from the\nserver and cached locally",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\nSubscribe to a collection that is published on the server\n\n     Bridge.subscribe('allposts', ['argument1', 'argument2'], function (Error) {\n         if (Error) {\n             Bridge.Error(Error.message);\n         }\n         else {\n             var Posts = Bridge.Collection('Posts');\n         }\n     });"
+            ],
+            "class": "Bridge"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 322,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nSort the result set",
+            "itemtype": "method",
+            "name": "sort",
+            "params": [
+                {
+                    "name": "sortValue",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Cursor"
+            },
+            "example": [
+                "\nSort your results. Provide field to sort and 1 for ascending or -1 for descending.\n\n     var Posts = new Bridge.Collection('Posts');\n     Posts.find().sort({date: 1});"
+            ],
+            "class": "Cursor"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 340,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nLimit the result set",
+            "itemtype": "method",
+            "name": "limit",
+            "params": [
+                {
+                    "name": "limitValue",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Cursor"
+            },
+            "example": [
+                "\nLimit your results. Provide the number of results you want to retrieve. You will get back the first results\nfound in the database within the limit. Normally the results are stored in the database based on the order\nthey where inserted in.\n\n     var Posts = new Bridge.Collection('Posts');\n     Posts.find().limit(5);"
+            ],
+            "class": "Cursor"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 360,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nCreate a complete result set",
+            "itemtype": "method",
+            "name": "toArray",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Cursor"
+            },
+            "example": [
+                "\nCreate an array of all results matching the current cursor options. <span class=\"important-info\">Warning, the\narray is completely mapped on the servers main memory depending on the number of items within the collection\nthat could cause a lot of memory usage. If you do not need to use the `toArray` function, you could use\n`stream` instead to save memory</span>\n\n     var Posts = new Bridge.Collection('Posts');\n     Posts.find().toArray(function (items) {\n         console.log(items);\n     });"
+            ],
+            "class": "Cursor"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 482,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "projection",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Cursor"
+            },
+            "example": [
+                "\nFind records in a collection matching the specified query, result contains specified fields\n\n     var Posts = new Bridge.Collection('Posts');\n     // Find all elements in a collection\n     Posts.find().toArray(function (items) {\n         console.log(items);\n     });\n     // Find a record in the collection with field `_id` matching 'c3d4ef3c-54ea-47fc-c874-66952365d789'\n     Posts.find({_id: 'c3d4ef3c-54ea-47fc-c874-66952365d789'}).toArray(function (items) {\n         console.log(items);\n     });\n     // Find all records in a collection result should only contain field `post`\n     Posts.find(null, [])."
+            ],
+            "class": "Bridge.Collection"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 510,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "query",
+                    "description": ""
+                },
+                {
+                    "name": "document",
+                    "description": ""
+                },
+                {
+                    "name": "options",
+                    "description": "\n     - upsert: {Boolean, default: false}, perform an upsert operation\n     - multi: {Boolean, default: false}, update all documents matching the selector",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nUpdate the first document matched by the selector. $set & $inc are supported\n\n     var Posts = new Bridge.Collection('Posts');\n     // Update the post message for the document with _id: '6bcdc8c3-6a41-4325-b439-e8a308ba1638'\n     Posts.update({_id: '6bcdc8c3-6a41-4325-b439-e8a308ba1638'}, {$set: {post: 'ABCD'}});"
+            ],
+            "class": "Bridge.Collection"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 591,
+            "params": [
+                {
+                    "name": "query",
+                    "description": ""
+                }
+            ],
+            "class": "Bridge.Collection"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 711,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nRegister a callback on a specific socket event",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nRegister a callback for `message` event\n\n     Bridge.Socket.on('message', function (data) {\n         console.log(data);\n     });"
+            ],
+            "class": "Bridge.Socket"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 728,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nEmit a new message to server/client",
+            "itemtype": "method",
+            "name": "emit",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "id",
+                    "description": "<span class=\"important-info\">Only available on server</span>",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\nEmit a `message` event\n\n     Bridge.Socket.emit('message', {\n         user: 'username',\n         message: 'message content'\n     });"
+            ],
+            "class": "Bridge.Socket"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 747,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Server</div>\nBroadcast a new message to all clients",
+            "itemtype": "method",
+            "name": "broadcast",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\nBroadcast a `message` to all clients\n\n     Bridge.Socket.broadcast('message', {\n         user: 'username',\n         message: 'message content'\n     });"
+            ],
+            "class": "Bridge.Socket"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 765,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Server</div>\nBroadcast a new message to all clients provided within the `ids` parameter,",
+            "itemtype": "method",
+            "name": "broadcastTo",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "ids",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "example": [
+                "\nBroadcast a `message` to some specified clients\n\n     Bridge.Socket.broadcastTo('message', {\n         user: 'username',\n         message: 'message content'\n     }, [\n         'c01c1a19-4462-4ecb-d29d-e6944afc3dd3',\n         '8a109d17-2c0c-422c-d856-ac5b6c8eba00',\n         '3c0b763e-acb3-4cdd-de00-4f090b9e7326'\n     ]);"
+            ],
+            "class": "Bridge.Socket"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 806,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Server</div>\nValidates the creation of a new user account, returns true by default. Specify a callback to perform a\nspecific validation returning true or false.",
+            "itemtype": "method",
+            "name": "validateNewUser",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nRegister a callback to customize the validation of a new user account creation\n\n     Bridge.Accounts.validateNewUser(function (user) {\n         if (usernameIsAvailable(user.username)) {\n             return true;\n         }\n         else {\n             return false;\n         }\n     });"
+            ],
+            "class": "Bridge.Accounts"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 830,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Server</div>\nCustomize the creation of a new user",
+            "itemtype": "method",
+            "name": "onCreateUser",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nRegister a callback to customize the creation of a new user\n\n     Bridge.Accounts.onCreateUser(function (user) {\n         options.profile.level = 0;      // Customize the profile of a user, by adding new properties\n         options.picture = 'image.png'   // Add new properties to the user object\n     });"
+            ],
+            "class": "Bridge.Accounts"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 851,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Client</div>\nLogin a user by providing username and password, if the login fails a single `Error` object is passed to\nthe callback function as parameter",
+            "itemtype": "method",
+            "name": "loginWithPassword",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\nLogin a user\n\n     Bridge.Accounts.loginWithPassword('username', 'password', function (Error) {\n         if (Error) {\n             console.log(Error.message);\n         }\n     });"
+            ],
+            "class": "Bridge.Accounts"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 876,
+            "description": "<div class=\"usage-box\"><b>USAGE: </b>Anywhere</div>\nCreate a new user in the database",
+            "itemtype": "method",
+            "name": "createUser",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "<span class=\"important-info\">Only available on server</span>",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\nCreate a new user\n\n     Bridge.Accounts.createUser({\n         username: 'username',\n         email: 'email@email.com',\n         password: 'password',\n         profile: {\n             name: 'name',\n             prename: 'prename'\n             // Add your own properties you want to store in a users profile\n         }\n     });"
+            ],
+            "class": "Bridge.Accounts"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 936,
+            "description": "Select all matching elements of a collection",
+            "itemtype": "method",
+            "name": "selectElementsFromCollection",
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "Name of the collection to select elements from",
+                    "type": "String"
+                },
+                {
+                    "name": "query",
+                    "description": "Selector to specify the search criteria",
+                    "type": "Object"
+                }
+            ],
+            "class": "Bridge.Error"
+        },
+        {
+            "file": "server/lib/lib.bridge.js",
+            "line": 999,
+            "description": "Initialize socket protocol on client and server",
+            "class": "Bridge.Error"
+        },
+        {
+            "file": "server/lib/server.bridge.core.js",
+            "line": 22,
+            "itemtype": "method",
+            "name": "config",
+            "params": [
+                {
+                    "name": "connection",
+                    "description": "\n  The database connection object\n  <pre class=\"prettyprint linenums lang-js\">\n  {\n      host {String},          // Database host\n      [port] {Number},        // Database port\n      [username] {String},    // Database username\n      [password] {String}     // Database password\n  }</pre>",
+                    "type": "Object"
+                },
+                {
+                    "name": "adapters",
+                    "description": "\n      A list of modules to include\n      ['accounts', '...']",
+                    "type": "Array"
+                }
+            ],
+            "class": "Bridge"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " server/lib/lib.bridge.js:591"
+        },
+        {
+            "message": "Missing item type\nInitialize socket protocol on client and server",
+            "line": " server/lib/lib.bridge.js:999"
+        }
+    ]
+}
