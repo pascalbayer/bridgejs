@@ -128,7 +128,9 @@ var fs = typeof global != 'undefined' ? require('fs') : {};
             Bridge.Settings.server.removeAllListeners('request');
 
             Bridge.Settings.server.on('request', function (request, response) {
+                // if /bridgejs/* is called then process it
                 if (path == request.url.substr(0, path.length)) {
+                    // if the bridgejs script is requested, read it and return it to the client
                     if (request.url == '/bridgejs/bridge.js') {
                         fs.readFile(__dirname + '/server/lib.bridge.js', function (error, content) {
                             if (!error) {
@@ -139,10 +141,13 @@ var fs = typeof global != 'undefined' ? require('fs') : {};
                             }
                         });
                     }
+                    // otherwise response with a hearty welcome message
                     else {
                         response.end('Welcome to bridge.js.');
                     }
-                } else {
+                }
+                // otherwise (/bridgejs) send the message to all connected clients
+                else {
                     for (var i = 0, l = listeners.length; i < l; i++) {
                         listeners[i].call(Bridge.Settings.server, request, response);
                     }
