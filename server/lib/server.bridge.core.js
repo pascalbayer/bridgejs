@@ -36,7 +36,6 @@ var Bridge = module.exports,
  *      ['accounts', '...']
  */
 Bridge.config = function (connection, adapters) {
-
 }
 
 
