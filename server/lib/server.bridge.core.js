@@ -15,7 +15,7 @@
  */
 var Bridge = module.exports,
     underscore = require('underscore'),
-    database = require('mongojs'),
+    database = require('jugglingdb'),
     socketio = require('socket.io'),
     fs = require('fs');
 
@@ -29,7 +29,9 @@ var Bridge = module.exports,
  *      host {String},          // Database host
  *      [port] {Number},        // Database port
  *      [username] {String},    // Database username
- *      [password] {String}     // Database password
+ *      [password] {String},    // Database password
+ *      [database] {String},    // Database name
+ *      [debug] {Boolean}       // Enable debugging mode
  *  }</pre>
  * @param adapters {Array}
  *      A list of modules to include

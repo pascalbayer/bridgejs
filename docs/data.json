@@ -678,7 +678,7 @@
             "params": [
                 {
                     "name": "connection",
-                    "description": "\n  The database connection object\n  <pre class=\"prettyprint linenums lang-js\">\n  {\n      host {String},          // Database host\n      [port] {Number},        // Database port\n      [username] {String},    // Database username\n      [password] {String}     // Database password\n  }</pre>",
+                    "description": "\n  The database connection object\n  <pre class=\"prettyprint linenums lang-js\">\n  {\n      host {String},          // Database host\n      [port] {Number},        // Database port\n      [username] {String},    // Database username\n      [password] {String},    // Database password\n      [database] {String},    // Database name\n      [debug] {Boolean}       // Enable debugging mode\n  }</pre>",
                     "type": "Object"
                 },
                 {
