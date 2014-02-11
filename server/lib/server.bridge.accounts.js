@@ -75,6 +75,8 @@ Bridge.Accounts = (function () {
      * @method createUser
      * @param user {Object}
      * @param callback {Function} <span class="important-info">Only available on server</span>
+     * @return {Boolean} true if the user could be created
+     * @throws Bridge.Error if the creation fails, because of insufficient permissions
      * @example
      * Create a new user
      *
@@ -93,9 +95,10 @@ Bridge.Accounts = (function () {
         if (validateNewUserCallback(user)) {
             createUserCallback(user);
             db.collection('Users').insert(user);
+            return true;
         }
         else {
-            return Bridge.Error('The creation of the user was not granted');
+            throw Bridge.Error('The creation of the user was not granted');
         }
     };
 
