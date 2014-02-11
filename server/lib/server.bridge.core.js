@@ -36,6 +36,9 @@ var Bridge = module.exports,
  *      ['accounts', '...']
  */
 Bridge.config = function (connection, adapters) {
+    for(var adapter in adapters){
+
+    }
 }
 
 
