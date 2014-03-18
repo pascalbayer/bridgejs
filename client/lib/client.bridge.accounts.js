@@ -68,18 +68,8 @@ Bridge.Accounts = (function () {
      *      });
      */
     Accounts.createUser = function (user, callback) {
-        if (Bridge.isServer) {
-            if (validateNewUserCallback(user)) {
-                createUserCallback(user);
-                db.collection('Users').insert(user);
-            }
-            else {
-                return Bridge.Error('The creation of the user was not granted');
-            }
-        }
-        else {
-            Bridge.Socket.emit('createUser', user);
-        }
+        //TODO: do something with callback
+        Bridge.Socket.emit('createUser', user);
     };
 
     return Accounts;
