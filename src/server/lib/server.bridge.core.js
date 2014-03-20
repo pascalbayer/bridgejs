@@ -39,7 +39,8 @@ var Bridge = module.exports,
  */
 Bridge.config = function (connection, adapters) {
     for(var adapter in adapters){
-
+        //TODO: check if adapter is string
+        Bridge[adapter] = require(adapter);
     }
 }
 
@@ -819,129 +820,6 @@ Bridge.config = function (connection, adapters) {
 //        }
 //    }());
 //
-//    /**
-//     * Accounts provide the build in account system to easily create new users, managing users and complete common
-//     * required actions on user profiles
-//     *
-//     * @class Bridge.Accounts
-//     */
-//    Bridge.Accounts = (function () {
-//        var Accounts = {};
-//        var createUserCallback = function () {
-//        };
-//        var validateNewUserCallback = function () {
-//            return true;
-//        };
-//
-//        if (Bridge.isServer) {
-//            /**
-//             * <div class="usage-box"><b>USAGE: </b>Server</div>
-//             * Validates the creation of a new user account, returns true by default. Specify a callback to perform a
-//             * specific validation returning true or false.
-//             *
-//             * @method validateNewUser
-//             * @param callback {Function}
-//             * @example
-//             * Register a callback to customize the validation of a new user account creation
-//             *
-//             *      Bridge.Accounts.validateNewUser(function (user) {
-//             *          if (usernameIsAvailable(user.username)) {
-//             *              return true;
-//             *          }
-//             *          else {
-//             *              return false;
-//             *          }
-//             *      });
-//             */
-//            Accounts.validateNewUser = function (callback) {
-//                if (typeof callback == 'function') {
-//                    validateNewUserCallback = callback;
-//                }
-//            };
-//            /**
-//             * <div class="usage-box"><b>USAGE: </b>Server</div>
-//             * Customize the creation of a new user
-//             *
-//             * @method onCreateUser
-//             * @param callback {Function}
-//             * @example
-//             * Register a callback to customize the creation of a new user
-//             *
-//             *      Bridge.Accounts.onCreateUser(function (user) {
-//             *          options.profile.level = 0;      // Customize the profile of a user, by adding new properties
-//             *          options.picture = 'image.png'   // Add new properties to the user object
-//             *      });
-//             */
-//            Accounts.onCreateUser = function (callback) {
-//                if (typeof callback == 'function') {
-//                    createUserCallback = callback;
-//                }
-//            };
-//        }
-//        else {
-//            /**
-//             * <div class="usage-box"><b>USAGE: </b>Client</div>
-//             * Login a user by providing username and password, if the login fails a single `Error` object is passed to
-//             * the callback function as parameter
-//             *
-//             * @method loginWithPassword
-//             * @param user {String}
-//             * @param password {String}
-//             * @param [callback] {Function}
-//             * @example
-//             * Login a user
-//             *
-//             *      Bridge.Accounts.loginWithPassword('username', 'password', function (Error) {
-//             *          if (Error) {
-//             *              console.log(Error.message);
-//             *          }
-//             *      });
-//             */
-//            Accounts.loginWithPassword = function (user, password, callback) {
-//                Bridge.Socket.emit('loginWithPassword', {
-//                    user: user,
-//                    password: password
-//                });
-//            };
-//        }
-//        /**
-//         * <div class="usage-box"><b>USAGE: </b>Anywhere</div>
-//         * Create a new user in the database
-//         *
-//         * @method createUser
-//         * @param user {Object}
-//         * @param callback {Function} <span class="important-info">Only available on server</span>
-//         * @example
-//         * Create a new user
-//         *
-//         *      Bridge.Accounts.createUser({
-//         *          username: 'username',
-//         *          email: 'email@email.com',
-//         *          password: 'password',
-//         *          profile: {
-//         *              name: 'name',
-//         *              prename: 'prename'
-//         *              // Add your own properties you want to store in a users profile
-//         *          }
-//         *      });
-//         */
-//        Accounts.createUser = function (user, callback) {
-//            if (Bridge.isServer) {
-//                if (validateNewUserCallback(user)) {
-//                    createUserCallback(user);
-//                    db.collection('Users').insert(user);
-//                }
-//                else {
-//                    return Bridge.Error('The creation of the user was not granted');
-//                }
-//            }
-//            else {
-//                Bridge.Socket.emit('createUser', user);
-//            }
-//        };
-//
-//        return Accounts;
-//    }());
 //    /**
 //     * Create an Error object by providing the error details as parameter
 //     *

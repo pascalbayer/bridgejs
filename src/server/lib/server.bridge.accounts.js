@@ -92,6 +92,7 @@ Bridge.Accounts = (function () {
      *      });
      */
     Accounts.createUser = function (user, callback) {
+        //TODO: do something with callback
         if (validateNewUserCallback(user)) {
             createUserCallback(user);
             db.collection('Users').insert(user);
