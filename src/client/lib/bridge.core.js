@@ -7,11 +7,20 @@
  * https://github.com/pascalbayer/bridgejs/blob/master/LICENSE
  */
 
+define(function () {
+    return {};
+});
+
+
+
+
+/*
 var Bridge = {},
     underscore = window._,
     database = {},
     socketio = window.io,
     fs = {};
+*/
 
 
 
