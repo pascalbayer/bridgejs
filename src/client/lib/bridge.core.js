@@ -8,7 +8,15 @@
  */
 
 define(function () {
-    return {};
+    var Bridge = (function (Bridge) {
+        Bridge.module = function (x) {
+            return x;
+        };
+
+        return Bridge;
+    })({});
+
+    return Bridge;
 });
 
 

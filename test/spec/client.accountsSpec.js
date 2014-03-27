@@ -3,6 +3,7 @@ define(['Bridge'], function (Bridge) {
         it('Accounts config check', function() {
             // just checking that _ works
             expect(Bridge.Accounts.x).toEqual(undefined);
+            expect(Bridge.module(5)).toEqual(5);
         });
     });
 });

@@ -1,11 +1,11 @@
 require.config({
     baseUrl: 'lib/',
     paths: {
-        'Bridge': 'bridge.core.js',
-        'Bridge.Accounts': 'bridge.core.js'
+        'Bridge': 'bridge.core',
+        'Bridge.Accounts': 'bridge.core'
     }
 });
 
-require(['Bridge.Accounts'], function () {
+require(['Bridge.Accounts'], function (Bridge) {
 
 });

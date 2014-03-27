@@ -71,7 +71,7 @@ define('Bridge', function (Bridge) {
         };
 
         return Accounts;
-    }());
+    })();
 
     return Bridge;
 });
