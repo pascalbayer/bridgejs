@@ -2,33 +2,117 @@
  * bridgejs
  * http://bridgejs.com/
  *
- * Copyright (c) 2014 Pascal Bayer
+ * Copyright (c) 2014 Cubesoft
+ * Authors Pascal Bayer, Sebastian Wahn
  * Licensed under the MIT license.
  * https://github.com/pascalbayer/bridgejs/blob/master/LICENSE
  */
 
+'use strict';
+
 define(function () {
-    var Bridge = (function (Bridge) {
-        Bridge.module = function (x) {
-            return x;
+    (function (window, document, undefined) {
+        var bridgejs = window.bridgejs || (window.bridgejs = {});
+
+        /**
+         * @ngdoc object
+         * @name bridgejs.version
+         * @module bg
+         * @description
+         * An object that contains information about the current AngularJS version. This object has the
+         * following properties:
+         *
+         * - `full` – `{string}` – Full version string, such as "0.9.18".
+         * - `major` – `{number}` – Major version number, such as "0".
+         * - `minor` – `{number}` – Minor version number, such as "9".
+         * - `dot` – `{number}` – Dot version number, such as "18".
+         * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
+         */
+        var version = {
+            codeName: 'grayhound',
+            full: '0.0.4-alpha-0.0.1',
+            major: 0,
+            minor: 0,
+            dot: 4
         };
 
-        return Bridge;
-    })({});
+        /**
+         * @ngdoc function
+         * @name bridgejs.isObject
+         * @module bg
+         * @function
+         *
+         * @description
+         * Determines if a reference is an `Object`. Unlike `typeof` in JavaScript, `null`s are not
+         * considered to be objects. Note that JavaScript arrays are objects.
+         *
+         * @param {*} value Reference to check.
+         * @returns {boolean} True if `value` is an `Object` but not `null`.
+         */
+        function isObject(obj) {
+            return obj === Object(obj);
+        }
 
-    return Bridge;
+        /**
+         * @ngdoc function
+         * @name bridgejs.extend
+         * @module bg
+         * @function
+         *
+         * @description
+         * Deep extend the destination object with all properties of the source object
+         *
+         * @param {Object} destination Object to deep extend.
+         * @param {Object} source Object to copy.
+         * @returns {Object} Destination object extented with all properties of the source object.
+         */
+        function extend(dest, src) {
+            for (var prop in src) {
+                if (src[prop] && src[prop].constructor && src[prop].constructor === Object) {
+                    dest[prop] = dest[prop] || {};
+                    extend(dest[prop], src[prop]);
+                } else {
+                    dest[prop] = src[prop];
+                }
+            }
+            return dest;
+        }
+
+        function module() {
+            var requires = [];
+
+            return {
+                name: arguments[0],
+                requires: requires
+            }
+        }
+
+        function publishExternalAPI(bridgejs) {
+            extend(bridgejs, {
+                isObject: isObject,
+                module: module,
+                version: version
+            });
+        }
+
+        if (isObject(window.bridgejs.version)) {
+            // BridgeJS was already initialized
+            console.log('WARNING: Tried to load BridgeJS more than once.');
+            return;
+        }
+
+        publishExternalAPI(bridgejs);
+    })(window, document);
 });
 
 
-
-
 /*
-var Bridge = {},
-    underscore = window._,
-    database = {},
-    socketio = window.io,
-    fs = {};
-*/
+ var Bridge = {},
+ underscore = window._,
+ database = {},
+ socketio = window.io,
+ fs = {};
+ */
 
 
 

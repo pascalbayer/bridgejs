@@ -1,134 +1,211 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js ng-app: docsApp;" lang="en" ng-controller="DocsController"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <title>bridgejs</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="./assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="./assets/css/prettify.css"/>
-    <link rel="shortcut icon" type="image/png" href="./assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-    <script type="text/javascript" src="./assets/js/prettify.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description"
+        content="AngularJS is what HTML would have been, had it been designed for building web-apps.
+                 Declarative templates with data-binding, MVC, dependency injection and great
+                 testability story all implemented with pure client-side JavaScript!">
+  <meta name="fragment" content="!">
+  <title ng-bind-template="BridgeJS: {{partialTitle}}">Docs</title>
+  <script type="text/javascript">
+    // dynamically add base tag as well as css and javascript files.
+    // we can't add css/js the usual way, because some browsers (FF) eagerly prefetch resources
+    // before the base attribute is added, causing 404 and terribly slow loading of the docs app.
+    (function() {
+      var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
+          rUrl = /(#!\/|tutorial|api|index[^\.]*\.html).*$/,
+          baseUrl = location.href.replace(rUrl, indexFile),
+          headEl = document.getElementsByTagName('head')[0],
+          sync = true;
+
+      addTag('base', {href: baseUrl});
+      addTag('link', {rel: 'stylesheet', href: 'css/bootstrap.min.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/font-awesome.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/prettify.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/docs.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
+
+      
+
+      addTag('script', {src: 'js/google-code-prettify.js'}, sync);
+      addTag('script', {src: 'js/marked.js'}, sync);
+
+      
+        addTag('script', {src: 'js/angular.min.js'}, sync);
+      
+
+      addTag('script', {src: 'js/angular-bootstrap.js'}, sync);
+      addTag('script', {src: 'js/angular-bootstrap-prettify.js'}, sync);
+      addTag('script', {src: 'js/docs-setup.js'}, sync);
+      addTag('script', {src: 'js/docs.js'}, sync);
+
+      function addTag(name, attributes, sync) {
+        var el = document.createElement(name),
+            attrName;
+
+        for (attrName in attributes) {
+          el.setAttribute(attrName, attributes[attrName]);
+        }
+
+        sync ? document.write(outerHTML(el)) : headEl.appendChild(el);
+      }
+
+      function outerHTML(node){
+        // if IE, Chrome take the internal method otherwise build one
+        return node.outerHTML || (
+            function(n){
+                var div = document.createElement('div'), h;
+                div.appendChild(n);
+                h = div.innerHTML;
+                div = null;
+                return h;
+            })(node);
+      }
+    })();
+
+  </script>
 </head>
-<body class="yui3-skin-sam">
 
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="./assets/css/logo.png" title="bridgejs"></h1>
-            
+<body>
+  <header class="header">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          
+          
+            <a  href="/api"  class="brand">BridgeJS</a>
+          
+          <ul class="nav">
+            <li ng-repeat="(url, name) in sections" ng-class="{active: isActivePath(url)}">
+              <a ng-href="{{url}}"><i class="icon-book icon-white"></i> {{name}}</a>
+            </li>
+          </ul>
+          
         </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.5</em>
-        </div>
+      </div>
     </div>
-    <div id="bd" class="yui3-g">
+  </header>
 
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
+  <div role="main" class="container">
+    <div class="row clear-navbar"></div>
+
+    <div class="row">
+      <div class="span12">
+        <!--[if lt IE 7]>
+        <p class="alert alert-error">Your browser is <em>ancient!</em>
+          <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+          <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
+          experience this site.
+        </p>
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+        <div class="alert">
+          You are using an old version of Internet Explorer.
+          For better and safer browsing experience please <a href="http://www.microsoft.com/IE9">upgrade IE</a>
+          or install <a href="http://google.com/chrome">Google Chrome browser</a>.
+        </div>
+        <![endif]-->
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <form class="form-search" ng-submit="submitForm()">
+          
+          <div class="dropdown search"
+               ng-class="{open: focused && bestMatch.rank > 0 && bestMatch.page != currentPage}">
+            <input type="text" ng-model="search" placeholder="search the docs"
+                   tabindex="1" accesskey="s" class="search-query" focused="focused">
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{bestMatch.page.url}}">{{bestMatch.page.shortName}}</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="spacer"></div>
+
+          <ul class="nav nav-list well" ng-show="pages">
+            <li ng-repeat="page in pages track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-list well" ng-repeat="module in modules track by module.url" class="api-list-item">
+            <li class="nav-header module">
+              <a class="guide">module</a>
+              <a class="code" href="{{module.url}}">{{module.name}}</a>
+            </li>
+
+            <li ng-repeat="page in module.others track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.directives">
+              <a class="guide">directive</a>
+            </li>
+            <li ng-repeat="page in module.directives track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.filters">
+              <a class="guide">filter</a>
+            </li>
+            <li ng-repeat="page in module.filters track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.services">
+              <a class="guide">service</a>
+            </li>
+            <li ng-repeat="service in module.services track by service.instance.url" ng-class="navClass(service.instance, service.provider)" class="api-list-item expand">
+              <a ng-show="service.provider" class="pull-right" href="{{service.provider.url}}" tabindex="2"><i class="icon-cog"></i></a>
+              <a href="{{service.instance.url}}" tabindex="2">{{service.name}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.types">
+              <a class="guide">Types</a>
+            </li>
+            <li ng-repeat="page in module.types track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.globals">
+              <a class="global guide">global APIs</a>
+              &nbsp;
+            </li>
+            <li ng-repeat="page in module.globals track by page.url" ng-class="navClass(page)" class="api-list-item expand">
+              <a href="{{page.url}}" tabindex="2">{{page.id}}</a>
+            </li>
+
+          </ul>
+
+        </form>
+      </div>
+      <div class="span9">
+
+        <ul class="breadcrumb">
+          <li ng-repeat="crumb in breadcrumb">
+            <span ng-hide="crumb.url">{{crumb.name}}</span>
+            <a ng-show="crumb.url" href="{{crumb.url}}">{{crumb.name}}</a>
+            <span ng-show="crumb.url" class="divider">/</span>
+          </li>
         </ul>
 
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
+        <div id="loading" ng-show="loading">Loading...</div>
 
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="./classes/Bridge.html">Bridge</a></li>
-            
-                <li><a href="./classes/Bridge.Accounts.html">Bridge.Accounts</a></li>
-            
-                <li><a href="./classes/Bridge.Collection.html">Bridge.Collection</a></li>
-            
-                <li><a href="./classes/Bridge.Error.html">Bridge.Error</a></li>
-            
-                <li><a href="./classes/Bridge.Socket.html">Bridge.Socket</a></li>
-            
-                <li><a href="./classes/Cursor.html">Cursor</a></li>
-            
-            </ul>
+        <div ng-hide="loading" ng-include src="currentPage.partialUrl" onload="afterPartialLoaded()" autoscroll class="content slide-reveal"></div>
 
-            <ul id="api-modules" class="apis modules">
-            
-            </ul>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                            <div class="apidocs">
-        <div id="docs-main" class="content">
-            <p>
-            Browse to a module or class using the sidebar to view its API documentation.
-            </p>
-
-            <h2>Keyboard Shortcuts</h2>
-
-            <ul>
-                <li><p>Press <kbd>s</kbd> to focus the API search box.</p></li>
-
-                <li><p>Use <kbd>Up</kbd> and <kbd>Down</kbd> to select classes, modules, and search results.</p></li>
-
-                <li class="mac-only"><p>With the API search box or sidebar focused, use <kbd><span class="cmd">&#x2318;</span>-Left</kbd> or <kbd><span class="cmd">&#x2318;</span>-Right</kbd> to switch sidebar tabs.</p></li>
-
-                <li class="pc-only"><p>With the API search box or sidebar focused, use <kbd>Ctrl+Left</kbd> and <kbd>Ctrl+Right</kbd> to switch sidebar tabs.</p></li>
-            </ul>
-        </div>
-    </div>
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="./assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="./assets/js/yui-prettify.js"></script>
-<script src="./assets/../api.js"></script>
-<script src="./assets/js/api-filter.js"></script>
-<script src="./assets/js/api-list.js"></script>
-<script src="./assets/js/api-search.js"></script>
-<script src="./assets/js/apidocs.js"></script>
 </body>
 </html>

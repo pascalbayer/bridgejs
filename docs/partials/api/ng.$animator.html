@@ -1,0 +1,61 @@
+<h1><code ng:non-bindable="">$animator</code>
+<div><span class="hint">service in module <code ng:non-bindable="">ng</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="ng-animator-page"><p>The $animator.create service provides the DOM manipulation API which is decorated with animations.</p>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">$animator(scope, attr);</pre>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>scope</td><td><a href="" class="label type-hint type-hint-scope">Scope</a></td><td><div class="ng-animator-page"><p>the scope for the ng-animate.</p>
+</div></td></tr><tr><td>attr</td><td><a href="" class="label type-hint type-hint-attributes">Attributes</a></td><td><div class="ng-animator-page"><p>the attributes object which contains the ngAnimate key / value pair. (The attributes are
+passed into the linking function of the directive using the <code>$animator</code>.)</p>
+</div></td></tr></tbody></table><h4 id="usage_returns">Returns</h4><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="ng-animator-page"><p>the animator object which contains the enter, leave, move, show, hide and animate methods.</p>
+</div></td></tr></table></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_animate">animate(element)</h3>
+<div class="animate"><div class="ng-animator-animate-page"><p>Triggers a custom animation event to be executed on the given element</p>
+</div><h5 id="methods_animate_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-animate-page"><p>that will be animated</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_enabled">enabled(If)</h3>
+<div class="enabled"><div class="ng-animator-enabled-page"><p>Globally enables/disables animations.</p>
+</div><h5 id="methods_enabled_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>If <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td><td><div class="ng-animator-enabled-page"><p>provided then set the animation on or off.</p>
+</div></td></tr></tbody></table><h5 id="methods_enabled_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td><td><div class="ng-animator-enabled-page"><p>Current animation state.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_enter">enter(element, parent, after)</h3>
+<div class="enter"><div class="ng-animator-enter-page"><p>Injects the element object into the DOM (inside of the parent element) and then runs the enter animation.</p>
+</div><h5 id="methods_enter_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-enter-page"><p>the element that will be the focus of the enter animation</p>
+</div></td></tr><tr><td>parent</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-enter-page"><p>the parent element of the element that will be the focus of the enter animation</p>
+</div></td></tr><tr><td>after</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-enter-page"><p>the sibling element (which is the previous element) of the element that will be the focus of the enter animation</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_hide">hide(element)</h3>
+<div class=""><div class="ng-animator-hide-page"><p>Starts the hide animation first and sets the CSS <code>display</code> property to <code>none</code> upon completion.</p>
+</div><h5 id="methods_hide_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-hide-page"><p>the element that will be rendered visible or hidden</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_leave">leave(element, parent)</h3>
+<div class="leave"><div class="ng-animator-leave-page"><p>Runs the leave animation operation and, upon completion, removes the element from the DOM.</p>
+</div><h5 id="methods_leave_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-leave-page"><p>the element that will be the focus of the leave animation</p>
+</div></td></tr><tr><td>parent</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-leave-page"><p>the parent element of the element that will be the focus of the leave animation</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_move">move(element, parent, after)</h3>
+<div class="move"><div class="ng-animator-move-page"><p>Fires the move DOM operation. Just before the animation starts, the animator will either append it into the parent container or
+add the element directly after the after element if present. Then the move animation will be run.</p>
+</div><h5 id="methods_move_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-move-page"><p>the element that will be the focus of the move animation</p>
+</div></td></tr><tr><td>parent</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-move-page"><p>the parent element of the element that will be the focus of the move animation</p>
+</div></td></tr><tr><td>after</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-move-page"><p>the sibling element (which is the previous element) of the element that will be the focus of the move animation</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_show">show(element)</h3>
+<div class="show"><div class="ng-animator-show-page"><p>Reveals the element by setting the CSS property <code>display</code> to <code>block</code> and then starts the show animation directly after.</p>
+</div><h5 id="methods_show_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-jquery">jQuery/jqLite element</a></td><td><div class="ng-animator-show-page"><p>the element that will be rendered visible or hidden</p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>

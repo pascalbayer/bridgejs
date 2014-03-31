@@ -1,8 +1,8 @@
 define(['Bridge'], function (Bridge) {
-    describe('Testing Core', function() {
-        it('Module check', function() {
-            console.log(Bridge);
-            expect(Bridge.module(5)).toEqual(5);
+    describe('Testing Core#Module', function() {
+        it('Check module definition', function() {
+            var test = bridgejs.module('Test');
+            expect(test.name).toEqual('Test');
         });
     });
 });
