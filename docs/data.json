@@ -20,8 +20,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "server/lib/server.bridge.core.js": {
-            "name": "server/lib/server.bridge.core.js",
+        "server/lib/bridge.core.js": {
+            "name": "server/lib/bridge.core.js",
             "modules": {},
             "classes": {
                 "Bridge": 1
@@ -40,7 +40,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "server/lib/server.bridge.core.js",
+            "file": "server/lib/bridge.core.js",
             "line": 10,
             "description": "Bridge provides all framework components on a client as well as a server",
             "type": "{Bridge}"
@@ -671,7 +671,7 @@
             "class": "Bridge.Error"
         },
         {
-            "file": "server/lib/server.bridge.core.js",
+            "file": "server/lib/bridge.core.js",
             "line": 22,
             "itemtype": "method",
             "name": "config",
