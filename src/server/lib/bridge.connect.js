@@ -12,13 +12,30 @@
  *
  * @class Bridge.Connect
  */
-Bridge.Connect = (function(){
+Bridge.Connect = (function(port, undefined){
     var Connect = {};
     //TODO: needed when default ?
     var connectors = ['socket.io', ''];
+    var socket = require('socket.io').listen(port);
+    var clients = [];
 
-    Connect.connect = function(){};
-    Connect.send = function(){};
+    Connect.connect = function(){
+        socket.sockets.on('connection', function (socket) {
+
+            //TODO: change to key value array/object with user data
+            clients['id'] = socket;
+
+            socket.on('disconnect', function () {
+                //TODO: delete client from clients
+            });
+        });
+    };
+
+    Connect.send = function(clientId, message, protocol){
+        //TODO: lookup client and send the message to him
+        
+    };
+
     Connect.broadcast = function(){};
 
     return Connect;
