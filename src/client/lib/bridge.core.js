@@ -121,6 +121,7 @@
     function publishExternalAPI(bridgejs) {
         extend(bridgejs, {
             // Exposed API members
+            isString: isString,
             isObject: isObject,
             module: module,
             version: version,
