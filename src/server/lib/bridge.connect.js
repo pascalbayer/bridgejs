@@ -2,7 +2,8 @@
  * bridgejs
  * http://bridgejs.com/
  *
- * Copyright (c) 2014 Pascal Bayer, Sebastian Wahn
+ * Copyright (c) 2014
+ * Authors Pascal Bayer, Sebastian Wahn
  * Licensed under the MIT license.
  * https://github.com/pascalbayer/bridgejs/blob/master/LICENSE
  */
@@ -32,11 +33,23 @@ Bridge.Connect = (function(port, undefined){
     };
 
     Connect.send = function(clientId, message, protocol){
-        //TODO: lookup client and send the message to him
-        
+        if(protocol != undefined && message != undefined){
+            var client = clients[clientId];
+            if(client != undefined && client != null){
+                client.emit(protocol, message);
+            } else if (message != undfined) {
+                client.send()
+            }
+        }
     };
 
-    Connect.broadcast = function(){};
+    Connect.broadcast = function(message, protocol){
+        if(protocol != undefined && message != undefined){
+            clients.forEach(function(key, value){
+                value.emit(protocol, message);
+            });
+        }
+    };
 
     return Connect;
 }());
