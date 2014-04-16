@@ -2,7 +2,8 @@
  * bridgejs
  * http://bridgejs.com/
  *
- * Copyright (c) 2014 Pascal Bayer
+ * Copyright (c) 2014 Cubesoft
+ * Authors Pascal Bayer, Sebastian Wahn
  * Licensed under the MIT license.
  * https://github.com/pascalbayer/bridgejs/blob/master/LICENSE
  */
