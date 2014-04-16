@@ -10,100 +10,136 @@
 
 'use strict';
 
-define(function () {
-    (function (window, document, undefined) {
-        var bridgejs = window.bridgejs || (window.bridgejs = {});
+(function (window, document, undefined) {
+    var bridgejs            = window.bridgejs || (window.bridgejs = {}),
+        richErr             = richErr('bg');
 
-        /**
-         * @ngdoc object
-         * @name bridgejs.version
-         * @module bg
-         * @description
-         * An object that contains information about the current AngularJS version. This object has the
-         * following properties:
-         *
-         * - `full` – `{string}` – Full version string, such as "0.9.18".
-         * - `major` – `{number}` – Major version number, such as "0".
-         * - `minor` – `{number}` – Minor version number, such as "9".
-         * - `dot` – `{number}` – Dot version number, such as "18".
-         * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
-         */
-        var version = {
-            codeName: 'grayhound',
-            full: '0.0.4-alpha-0.0.1',
-            major: 0,
-            minor: 0,
-            dot: 4
+    /**
+     * @ngdoc object
+     * @name bridgejs.version
+     * @module bg
+     * @description
+     * An object that contains information about the current AngularJS version. This object has the
+     * following properties:
+     *
+     * - `full` – `{string}` – Full version string, such as "0.9.18".
+     * - `major` – `{number}` – Major version number, such as "0".
+     * - `minor` – `{number}` – Minor version number, such as "9".
+     * - `dot` – `{number}` – Dot version number, such as "18".
+     * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
+     */
+    var version = {
+        codeName: 'grayhound',
+        full: '0.0.4-alpha-0.0.1',
+        major: 0,
+        minor: 0,
+        dot: 4
+    };
+
+    /**
+     * @ngdoc function
+     * @name bridgejs.isObject
+     * @module bg
+     * @function
+     *
+     * @description
+     * Determines if a reference is an `Object`. Unlike `typeof` in JavaScript, `null`s are not
+     * considered to be objects. Note that JavaScript arrays are objects.
+     *
+     * @param {*} value Reference to check.
+     * @returns {boolean} True if `value` is an `Object` but not `null`.
+     */
+    function isObject(object) {
+        return object === Object(object);
+    }
+
+    function isString(string) {
+        return (typeof string == 'string' || string instanceof String)
+    }
+
+    function uuid() {
+        var date = new Date().getTime();
+        return 'XXXXXXXX-XXXX-4XXX-YXXX-XXXXXXXXXXXX'.replace(/[XY]/g, function (character) {
+            var random = (date + Math.random() * 16) % 16 | 0;
+            date = Math.floor(date / 16);
+            return (character == 'X' ? random : (random & 0x7 | 0x8)).toString(16);
+        });
+    };
+
+    /**
+     * @ngdoc function
+     * @name bridgejs.extend
+     * @module bg
+     * @function
+     *
+     * @description
+     * Deep extend the destination object with all properties of the source object
+     *
+     * @param {Object} destination Object to deep extend.
+     * @param {Object} source Object to copy.
+     * @returns {Object} Destination object extented with all properties of the source object.
+     */
+    function extend(dest, src) {
+        for (var prop in src) {
+            if (src[prop] && src[prop].constructor && src[prop].constructor === Object) {
+                dest[prop] = dest[prop] || {};
+                extend(dest[prop], src[prop]);
+            } else {
+                dest[prop] = src[prop];
+            }
+        }
+        return dest;
+    }
+
+    function module() {
+        if (!isString(arguments[0])) {
+            throw richErr('module', 'First module parameter needs to be of type "string"');
+        }
+
+        var requires = [];
+
+        return {
+            name: arguments[0],
+            requires: requires
         };
+    }
 
-        /**
-         * @ngdoc function
-         * @name bridgejs.isObject
-         * @module bg
-         * @function
-         *
-         * @description
-         * Determines if a reference is an `Object`. Unlike `typeof` in JavaScript, `null`s are not
-         * considered to be objects. Note that JavaScript arrays are objects.
-         *
-         * @param {*} value Reference to check.
-         * @returns {boolean} True if `value` is an `Object` but not `null`.
-         */
-        function isObject(obj) {
-            return obj === Object(obj);
-        }
+    // TODO: Improve error logging
+    function richErr(module) {
+        return function () {
+            var code = arguments[0];
+            var description = arguments[1];
 
-        /**
-         * @ngdoc function
-         * @name bridgejs.extend
-         * @module bg
-         * @function
-         *
-         * @description
-         * Deep extend the destination object with all properties of the source object
-         *
-         * @param {Object} destination Object to deep extend.
-         * @param {Object} source Object to copy.
-         * @returns {Object} Destination object extented with all properties of the source object.
-         */
-        function extend(dest, src) {
-            for (var prop in src) {
-                if (src[prop] && src[prop].constructor && src[prop].constructor === Object) {
-                    dest[prop] = dest[prop] || {};
-                    extend(dest[prop], src[prop]);
-                } else {
-                    dest[prop] = src[prop];
-                }
-            }
-            return dest;
-        }
+            var message = '[' + (module ? module + ':' : '') + code + ']\t';
 
-        function module() {
-            var requires = [];
+            message += description;
 
-            return {
-                name: arguments[0],
-                requires: requires
-            }
-        }
+            return new Error(message);
+        };
+    }
 
-        function publishExternalAPI(bridgejs) {
-            extend(bridgejs, {
-                isObject: isObject,
-                module: module,
-                version: version
-            });
-        }
+    function publishExternalAPI(bridgejs) {
+        extend(bridgejs, {
+            // Exposed API members
+            isString: isString,
+            isObject: isObject,
+            module: module,
+            version: version,
 
-        if (isObject(window.bridgejs.version)) {
-            // BridgeJS was already initialized
-            console.log('WARNING: Tried to load BridgeJS more than once.');
-            return;
-        }
+            // Possible candidates
+            extend: extend,
+            uuid: uuid
+        });
+    }
 
-        publishExternalAPI(bridgejs);
-    })(window, document);
-});
+    if (isObject(window.bridgejs.version)) {
+        // BridgeJS was already initialized
+        console.log('WARNING: Tried to load BridgeJS more than once.');
+        return;
+    }
+
+    publishExternalAPI(bridgejs);
+})(window, document);
 
 
 /*
